@@ -4,7 +4,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
 from db import items
-from schemas.item_schemas import ItemSchema, ItemUpdateSchema
+from controllers.schemas.item_schemas import ItemSchema, ItemUpdateSchema
 
 items_blp = Blueprint("items", __name__, description="Controller for items")
 

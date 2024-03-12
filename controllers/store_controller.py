@@ -4,7 +4,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
 from db import stores
-from schemas.store_schemas import StoreSchema
+from controllers.schemas.store_schemas import StoreSchema
 
 stores_blp = Blueprint("stores", __name__, description="Controller for stores")
 
