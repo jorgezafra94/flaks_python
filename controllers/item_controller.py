@@ -11,6 +11,7 @@ items_blp = Blueprint("items", __name__, description="Controller for items")
 
 @items_blp.route("/items/<item_id>")
 class ItemView(MethodView):
+    @items_blp.response(200, ItemSchema)
     def get(self, item_id):
         try:
             return items[item_id]
@@ -25,6 +26,7 @@ class ItemView(MethodView):
             abort(404, message="Item not found.")
 
     @items_blp.arguments(ItemUpdateSchema)
+    @items_blp.response(200, ItemUpdateSchema)
     def put(self, item_data, item_id):
         try:
             item = items[item_id]
@@ -36,10 +38,12 @@ class ItemView(MethodView):
 
 @items_blp.route("/items")
 class StoresView(MethodView):
+    @items_blp.response(200, ItemSchema(many=True))
     def get(self):
-        return {"items": list(items.values())}
+        return items.values()
 
     @items_blp.arguments(ItemSchema)
+    @items_blp.response(200, ItemSchema)
     def post(self, item_data):
         for item in items.values():
             if item_data["name"] == item["name"]:
