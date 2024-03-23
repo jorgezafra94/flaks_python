@@ -22,7 +22,7 @@ class ItemView(MethodView):
         db.session.commit()
 
     @items_blp.arguments(ItemUpdateSchema)
-    @items_blp.response(200, ItemUpdateSchema)
+    @items_blp.response(200, ItemSchema)
     def put(self, item_data, item_id):
         item = db.session.get(ItemModel, item_id)
         if item:
@@ -36,7 +36,7 @@ class ItemView(MethodView):
 
 
 @items_blp.route("/items")
-class StoresView(MethodView):
+class ItemsView(MethodView):
     @items_blp.response(200, ItemSchema(many=True))
     def get(self):
         return db.session.query(ItemModel).all()
