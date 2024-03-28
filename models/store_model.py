@@ -10,3 +10,4 @@ class StoreModel(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(80), unique=True, nullable=False)
     items: Mapped[List["ItemModel"]] = relationship(back_populates="store", lazy="dynamic")
+    tags: Mapped[List["TagModel"]] = relationship(back_populates="store", lazy="dynamic")
