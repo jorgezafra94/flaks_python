@@ -1,3 +1,5 @@
+from typing import List
+
 from sqlalchemy import String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -11,3 +13,4 @@ class TagModel(db.Model):
     name: Mapped[str] = mapped_column(String(80), unique=True, nullable=False)
     store_id: Mapped[int] = mapped_column(ForeignKey("stores.id"), unique=False, nullable=True)
     store: Mapped["StoreModel"] = relationship(back_populates="tags")
+    items: Mapped[List["ItemModel"]] = relationship(back_populates="tags", secondary="items_tags")

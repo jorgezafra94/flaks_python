@@ -2,8 +2,9 @@ from flask import Flask
 from flask_smorest import Api
 from controllers.store_controller import stores_blp
 from controllers.item_controller import items_blp
+from controllers.tag_controller import tags_blp
 from config import config_option
-from models import StoreModel, ItemModel, db
+from models import StoreModel, ItemModel, db, TagModel
 import os
 
 app = Flask(__name__)
@@ -17,6 +18,7 @@ with app.app_context():
 api = Api(app)
 api.register_blueprint(stores_blp)
 api.register_blueprint(items_blp)
+api.register_blueprint(tags_blp)
 
 if __name__ == "__main__":
     app.run()
