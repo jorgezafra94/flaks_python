@@ -44,3 +44,9 @@ class ItemsTagsSchemas(Schema):
     message = Str()
     item = Nested(PlainItemSchema(), dump_only=True)
     tag = Nested(PlainTagSchema(), dump_only=True)
+
+
+class UserSchema(Schema):
+    id = Int(dump_only=True)
+    username = Str(required=True)
+    password = Str(required=True, load_only=True)

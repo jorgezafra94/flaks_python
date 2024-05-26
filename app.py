@@ -4,7 +4,7 @@ from controllers.store_controller import stores_blp
 from controllers.item_controller import items_blp
 from controllers.tag_controller import tags_blp
 from config import config_option
-from models import StoreModel, ItemModel, db, TagModel
+from models import StoreModel, ItemModel, db, TagModel, UserModel
 import os
 
 app = Flask(__name__)
