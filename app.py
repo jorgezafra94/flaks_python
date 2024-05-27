@@ -3,6 +3,7 @@ from flask_smorest import Api
 from controllers.store_controller import stores_blp
 from controllers.item_controller import items_blp
 from controllers.tag_controller import tags_blp
+from controllers.user_controller import users_blp
 from config import config_option
 from models import StoreModel, ItemModel, db, TagModel, UserModel
 import os
@@ -19,6 +20,7 @@ api = Api(app)
 api.register_blueprint(stores_blp)
 api.register_blueprint(items_blp)
 api.register_blueprint(tags_blp)
+api.register_blueprint(users_blp)
 
 if __name__ == "__main__":
     app.run()
