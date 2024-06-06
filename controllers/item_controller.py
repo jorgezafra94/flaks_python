@@ -2,7 +2,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError
 
-from controllers.schemas.item_schemas import ItemSchema, ItemUpdateSchema
+from controllers.schemas import PlainItemSchema, ItemSchema, ItemUpdateSchema
 from models import db, ItemModel
 
 items_blp = Blueprint("items", __name__, description="Controller for items")

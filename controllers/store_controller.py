@@ -2,7 +2,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError
 
-from controllers.schemas.store_schemas import StoreSchema
+from controllers.schemas import PlainStoreSchema, StoreSchema
 from models import db, StoreModel
 
 stores_blp = Blueprint("stores", __name__, description="Controller for stores")
@@ -22,7 +22,7 @@ class StoreView(MethodView):
         db.session.delete(store)
         db.session.commit()
 
-    @stores_blp.arguments(StoreSchema)
+    @stores_blp.arguments(PlainStoreSchema)
     @stores_blp.response(200, StoreSchema)
     def put(self, store_data, store_id):
         store = db.session.get(StoreModel, store_id)
@@ -42,7 +42,7 @@ class StoresView(MethodView):
     def get(self):
         return db.session.query(StoreModel).all()
 
-    @stores_blp.arguments(StoreSchema)
+    @stores_blp.arguments(PlainStoreSchema)
     @stores_blp.response(200, StoreSchema)
     def post(self, store_data):
         store = StoreModel(**store_data)
