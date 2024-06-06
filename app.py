@@ -6,6 +6,8 @@ from controllers.tag_controller import tags_blp
 from controllers.user_controller import users_blp
 from config import config_option
 from models import StoreModel, ItemModel, db, TagModel, UserModel
+from flask_jwt_extended import JWTManager
+from exceptions.jwt_handler import jwt_exceptions
 import os
 
 app = Flask(__name__)
@@ -21,6 +23,9 @@ api.register_blueprint(stores_blp)
 api.register_blueprint(items_blp)
 api.register_blueprint(tags_blp)
 api.register_blueprint(users_blp)
+
+jwt = JWTManager(app)
+jwt_exceptions(jwt)
 
 if __name__ == "__main__":
     app.run()
