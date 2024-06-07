@@ -11,21 +11,27 @@ from flask_migrate import Migrate
 from exceptions.jwt_handler import jwt_exceptions
 import os
 
-app = Flask(__name__)
-load_config = config_option.get(os.getenv("FLASK_ENV", "Test"))
-app.config.from_object(load_config)
 
-db.init_app(app)
-migrate = Migrate(app, db)
+def create_app():
+    app = Flask(__name__)
+    load_config = config_option.get(os.getenv("FLASK_ENV", "Test"))
+    app.config.from_object(load_config)
 
-api = Api(app)
-api.register_blueprint(stores_blp)
-api.register_blueprint(items_blp)
-api.register_blueprint(tags_blp)
-api.register_blueprint(users_blp)
+    db.init_app(app)
+    migrate = Migrate(app, db)
 
-jwt = JWTManager(app)
-jwt_exceptions(jwt)
+    api = Api(app)
+    api.register_blueprint(stores_blp)
+    api.register_blueprint(items_blp)
+    api.register_blueprint(tags_blp)
+    api.register_blueprint(users_blp)
+
+    jwt = JWTManager(app)
+    jwt_exceptions(jwt)
+    return app
+
+
+App = create_app()
 
 if __name__ == "__main__":
-    app.run()
+    App.run()
