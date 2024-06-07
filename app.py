@@ -7,6 +7,7 @@ from controllers.user_controller import users_blp
 from config import config_option
 from models import StoreModel, ItemModel, db, TagModel, UserModel
 from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
 from exceptions.jwt_handler import jwt_exceptions
 import os
 
@@ -15,8 +16,7 @@ load_config = config_option.get(os.getenv("FLASK_ENV", "Test"))
 app.config.from_object(load_config)
 
 db.init_app(app)
-with app.app_context():
-    db.create_all()
+migrate = Migrate(app, db)
 
 api = Api(app)
 api.register_blueprint(stores_blp)
