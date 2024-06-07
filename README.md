@@ -3,8 +3,9 @@ adding some content
 
 # docker
 create image
+Do not forget the `.` at the end to specify the current dit
 ```
-docker build -t IMAGE_NAME
+docker build -t IMAGE_NAME .
 ```
 
 how to run this on docker
